@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MML Book System - Romeo and Juliet Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mml_book_styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #2C1810, #4A2C17);
+            min-height: 100vh;
+            font-family: 'Crimson Text', serif;
+            color: white;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .demo-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .demo-title h1 {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+        
+        .demo-title p {
+            color: #CCC;
+            font-size: 1.2rem;
+        }
+        
+        .bookshelf-container {
+            margin-bottom: 40px;
+        }
+        
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-title">
+            <h1>MML Book System</h1>
+            <p>Interactive Literature for Games</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>📚 How to Use:</h3>
+            <p>• <strong>Hover</strong> over the book spine to see the reading tooltip</p>
+            <p>• <strong>Click</strong> on Romeo & Juliet to open the book interface</p>
+            <p>• Use the navigation panel to jump to famous scenes</p>
+            <p>• Try searching for quotes like "wherefore art thou"</p>
+        </div>
+        
+        <div class="bookshelf-container">
+            <h3>Your Library:</h3>
+            <div class="bookshelf" id="gameBookshelf">
+                <!-- Books will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Reading Interface (hidden initially) -->
+    <div class="book-interface hidden" id="bookInterface">
+        <div class="book-reader fade-in">
+            <button class="close-book" id="closeBook">&times;</button>
+            
+            <div class="book-sidebar">
+                <div class="nav-section">
+                    <div class="progress-text">Reading Progress: <span id="progressPercent">0%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">🔍 Search</div>
+                    <input type="text" class="search-box" id="searchBox" placeholder="Search the text...">
+                    <div class="search-results" id="searchResults"></div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">⭐ Famous Scenes</div>
+                    <div class="nav-item" data-scene="balcony">Balcony Scene</div>
+                    <div class="nav-item" data-scene="fight">The Fight Scene</div>
+                    <div class="nav-item" data-scene="potion">Potion Scene</div>
+                    <div class="nav-item" data-scene="tomb">Tomb Scene</div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">📖 Table of Contents</div>
+                    <div class="nav-item toc-act">Prologue</div>
+                    <div class="nav-item toc-act">Act I</div>
+                    <div class="nav-item toc-scene" data-act="1" data-scene="1">Scene I: Public place</div>
+                    <div class="nav-item toc-scene" data-act="1" data-scene="2">Scene II: A Street</div>
+                    <div class="nav-item toc-scene" data-act="1" data-scene="5">Scene V: Capulet's party</div>
+                    <div class="nav-item toc-act">Act II</div>
+                    <div class="nav-item toc-scene" data-act="2" data-scene="2">Scene II: Balcony Scene</div>
+                    <div class="nav-item toc-act">Act III</div>
+                    <div class="nav-item toc-scene" data-act="3" data-scene="1">Scene I: The Fight</div>
+                    <div class="nav-item toc-act">Act V</div>
+                    <div class="nav-item toc-scene" data-act="5" data-scene="3">Scene III: The Tomb</div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-title">🔖 Bookmarks</div>
+                    <div id="bookmarksList">
+                        <div class="nav-item">No bookmarks yet</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="book-content" id="bookContent">
+                <div class="scene-header">
+                    <div class="scene-title">The Tragedy of Romeo and Juliet</div>
+                    <div class="scene-setting">by William Shakespeare</div>
+                </div>
+                
+                <div id="contentArea">
+                    <p><em>Select a scene from the navigation menu to begin reading...</em></p>
+                </div>
+            </div>
+            
+            <div class="book-controls">
+                <button class="control-btn" id="addBookmark">Bookmark</button>
+                <button class="control-btn" id="prevPage">← Previous</button>
+                <button class="control-btn" id="nextPage">Next →</button>
+            </div>
+            
+            <div class="page-number">
+                Page <span id="currentPage">1</span> of <span id="totalPages">142</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample book data (simplified for demo)
+        const romeoJulietData = {
+            metadata: {
+                title: "The Tragedy of Romeo and Juliet",
+                author: "William Shakespeare",
+                page_count: 142
+            },
+            scenes: {
+                prologue: {
+                    title: "Prologue",
+                    content: `<div class="stage-directions">[Enter Chorus]</div>
+                    
+                    <div class="speaker">CHORUS.</div>
+                    <div class="dialogue famous-quote">Two households, both alike in dignity,<br>
+                    In fair Verona, where we lay our scene,<br>
+                    From ancient grudge break to new mutiny,<br>
+                    Where civil blood makes civil hands unclean.<br>
+                    From forth the fatal loins of these two foes<br>
+                    A pair of star-cross'd lovers take their life;<br>
+                    Whose misadventur'd piteous overthrows<br>
+                    Doth with their death bury their parents' strife.</div>
+                    
+                    <div class="stage-directions">[Exit]</div>`
+                },
+                balcony: {
+                    title: "Act II, Scene II - Capulet's Garden",
+                    content: `<div class="scene-header">
+                        <div class="scene-title">Scene II <span class="famous-scene-marker">Famous Scene</span></div>
+                        <div class="scene-setting">Capulet's Garden - The Balcony Scene</div>
+                    </div>
+                    
+                    <div class="stage-directions">[Enter Romeo. Juliet appears above at a window.]</div>
+                    
+                    <div class="speaker">ROMEO.</div>
+                    <div class="dialogue">He jests at scars that never felt a wound.</div>
+                    
+                    <div class="dialogue famous-quote">But soft, what light through yonder window breaks?<br>
+                    It is the east, and Juliet is the sun!<br>
+                    Arise fair sun and kill the envious moon,<br>
+                    Who is already sick and pale with grief,<br>
+                    That thou her maid art far more fair than she.</div>
+                    
+                    <div class="speaker">JULIET.</div>
+                    <div class="dialogue famous-quote">O Romeo, Romeo, wherefore art thou Romeo?<br>
+                    Deny thy father and refuse thy name.<br>
+                    Or if thou wilt not, be but sworn my love,<br>
+                    And I'll no longer be a Capulet.</div>
+                    
+                    <div class="speaker">ROMEO.</div>
+                    <div class="dialogue">I take thee at thy word.<br>
+                    Call me but love, and I'll be new baptis'd;<br>
+                    Henceforth I never will be Romeo.</div>
+                    
+                    <div class="speaker">JULIET.</div>
+                    <div class="dialogue famous-quote">What's in a name? That which we call a rose<br>
+                    By any other name would smell as sweet;</div>`
+                },
+                fight: {
+                    title: "Act III, Scene I - A Public Place",
+                    content: `<div class="scene-header">
+                        <div class="scene-title">Scene I <span class="famous-scene-marker">Famous Scene</span></div>
+                        <div class="scene-setting">A public place - The Fight Scene</div>
+                    </div>
+                    
+                    <div class="stage-directions">[Enter Mercutio, Benvolio, and others. Enter Tybalt and others.]</div>
+                    
+                    <div class="speaker">TYBALT.</div>
+                    <div class="dialogue">Romeo, the love I bear thee can afford<br>
+                    No better term than this: Thou art a villain.</div>
+                    
+                    <div class="speaker">MERCUTIO.</div>
+                    <div class="dialogue famous-quote">A plague o' both your houses! I am sped.<br>
+                    Is he gone, and hath nothing?</div>
+                    
+                    <div class="stage-directions">[They fight; Tybalt falls]</div>
+                    
+                    <div class="speaker">ROMEO.</div>
+                    <div class="dialogue">O, I am fortune's fool!</div>`
+                },
+                tomb: {
+                    title: "Act V, Scene III - A Churchyard",
+                    content: `<div class="scene-header">
+                        <div class="scene-title">Scene III <span class="famous-scene-marker">Famous Scene</span></div>
+                        <div class="scene-setting">A churchyard; in it a monument belonging to the Capulets - The Tragic End</div>
+                    </div>
+                    
+                    <div class="stage-directions">[Romeo enters the tomb where Juliet lies]</div>
+                    
+                    <div class="speaker">ROMEO.</div>
+                    <div class="dialogue">Death, that hath suck'd the honey of thy breath,<br>
+                    Hath had no power yet upon thy beauty.<br>
+                    Thou art not conquer'd; beauty's ensign yet<br>
+                    Is crimson in thy lips and in thy cheeks,<br>
+                    And death's pale flag is not advanced there.</div>
+                    
+                    <div class="stage-directions">[He drinks poison]</div>
+                    
+                    <div class="speaker">JULIET.</div>
+                    <div class="dialogue">[Awakening] O comfortable friar, where is my lord?<br>
+                    I do remember well where I should be,<br>
+                    And there I am. Where is my Romeo?</div>
+                    
+                    <div class="stage-directions">[She stabs herself with Romeo's dagger]</div>
+                    
+                    <div class="dialogue famous-quote">O happy dagger!<br>
+                    This is thy sheath; there rust, and let me die.</div>`
+                }
+            }
+        };
+
+        class BookDemo {
+            constructor() {
+                this.currentScene = 'prologue';
+                this.currentPage = 1;
+                this.bookmarks = [];
+                this.init();
+            }
+
+            init() {
+                this.createBookshelf();
+                this.bindEvents();
+            }
+
+            createBookshelf() {
+                const bookshelf = document.getElementById('gameBookshelf');
+                
+                // Create Romeo and Juliet book spine
+                const bookSpine = document.createElement('div');
+                bookSpine.className = 'book-spine leather_bound deep_red';
+                bookSpine.style.height = '150px';
+                bookSpine.innerHTML = `
+                    <div class="spine-title">Romeo & Juliet</div>
+                    <div class="spine-author">Shakespeare</div>
+                    <div class="book-tooltip">READ - The Tragedy of Romeo and Juliet</div>
+                `;
+                
+                bookSpine.addEventListener('click', () => this.openBook());
+                bookshelf.appendChild(bookSpine);
+                
+                // Add some other demo books
+                this.addDemoBook(bookshelf, 'Hamlet', 'Shakespeare', '#2F4F4F');
+                this.addDemoBook(bookshelf, 'Macbeth', 'Shakespeare', '#8B0000');
+                this.addDemoBook(bookshelf, 'Othello', 'Shakespeare', '#4B0082');
+            }
+
+            addDemoBook(container, title, author, color) {
+                const bookSpine = document.createElement('div');
+                bookSpine.className = 'book-spine leather_bound';
+                bookSpine.style.background = `linear-gradient(90deg, ${color}, ${color}CC, ${color})`;
+                bookSpine.style.height = Math.random() * 40 + 130 + 'px';
+                bookSpine.style.color = '#FFD700';
+                bookSpine.innerHTML = `
+                    <div class="spine-title">${title}</div>
+                    <div class="spine-author">${author}</div>
+                    <div class="book-tooltip">Coming Soon!</div>
+                `;
+                
+                bookSpine.addEventListener('click', () => {
+                    alert('This book is not yet available in the demo!');
+                });
+                
+                container.appendChild(bookSpine);
+            }
+
+            bindEvents() {
+                // Close book
+                document.getElementById('closeBook').addEventListener('click', () => {
+                    document.getElementById('bookInterface').classList.add('hidden');
+                });
+
+                // Famous scenes navigation
+                document.querySelectorAll('[data-scene]').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const sceneName = item.dataset.scene;
+                        this.loadScene(sceneName);
+                        this.updateActiveNav(item);
+                    });
+                });
+
+                // TOC navigation
+                document.querySelectorAll('[data-act]').forEach(item => {
+                    item.addEventListener('click', () => {
+                        // For demo, just load balcony scene for Act 2
+                        if (item.dataset.act === '2' && item.dataset.scene === '2') {
+                            this.loadScene('balcony');
+                        } else {
+                            this.loadScene('prologue');
+                        }
+                        this.updateActiveNav(item);
+                    });
+                });
+
+                // Search functionality
+                const searchBox = document.getElementById('searchBox');
+                let searchTimeout;
+                searchBox.addEventListener('input', (e) => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        this.search(e.target.value);
+                    }, 300);
+                });
+
+                // Bookmarks
+                document.getElementById('addBookmark').addEventListener('click', () => {
+                    this.addBookmark();
+                });
+
+                // Page navigation (demo)
+                document.getElementById('prevPage').addEventListener('click', () => {
+                    if (this.currentPage > 1) {
+                        this.currentPage--;
+                        this.updatePageDisplay();
+                    }
+                });
+
+                document.getElementById('nextPage').addEventListener('click', () => {
+                    if (this.currentPage < 142) {
+                        this.currentPage++;
+                        this.updatePageDisplay();
+                    }
+                });
+            }
+
+            openBook() {
+                document.getElementById('bookInterface').classList.remove('hidden');
+                this.loadScene('prologue');
+                this.updateProgress();
+            }
+
+            loadScene(sceneName) {
+                const scene = romeoJulietData.scenes[sceneName];
+                if (!scene) return;
+
+                const contentArea = document.getElementById('contentArea');
+                contentArea.innerHTML = scene.content;
+                contentArea.classList.add('page-turn');
+                
+                setTimeout(() => {
+                    contentArea.classList.remove('page-turn');
+                }, 600);
+
+                this.currentScene = sceneName;
+                
+                // Update page number based on scene
+                const pageMap = {
+                    'prologue': 5,
+                    'balcony': 47,
+                    'fight': 80,
+                    'tomb': 138
+                };
+                
+                this.currentPage = pageMap[sceneName] || this.currentPage;
+                this.updatePageDisplay();
+                this.updateProgress();
+            }
+
+            updateActiveNav(activeItem) {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                activeItem.classList.add('active');
+            }
+
+            search(query) {
+                const resultsContainer = document.getElementById('searchResults');
+                
+                if (!query.trim()) {
+                    resultsContainer.innerHTML = '';
+                    return;
+                }
+
+                const results = [];
+                const searchTerm = query.toLowerCase();
+                
+                // Simple search through scene content
+                Object.entries(romeoJulietData.scenes).forEach(([sceneKey, scene]) => {
+                    if (scene.content.toLowerCase().includes(searchTerm)) {
+                        const snippet = this.extractSnippet(scene.content, searchTerm);
+                        results.push({
+                            scene: sceneKey,
+                            title: scene.title,
+                            snippet: snippet
+                        });
+                    }
+                });
+
+                if (results.length === 0) {
+                    resultsContainer.innerHTML = '<div class="nav-item">No results found</div>';
+                } else {
+                    resultsContainer.innerHTML = results.map(result => `
+                        <div class="search-result" data-scene="${result.scene}">
+                            <div><strong>${result.title}</strong></div>
+                            <div class="search-snippet">${result.snippet}</div>
+                        </div>
+                    `).join('');
+
+                    // Bind click events to search results
+                    resultsContainer.querySelectorAll('.search-result').forEach(item => {
+                        item.addEventListener('click', () => {
+                            this.loadScene(item.dataset.scene);
+                        });
+                    });
+                }
+            }
+
+            extractSnippet(content, searchTerm) {
+                const cleanContent = content.replace(/<[^>]*>/g, ' ');
+                const index = cleanContent.toLowerCase().indexOf(searchTerm.toLowerCase());
+                if (index === -1) return 'Match found...';
+                
+                const start = Math.max(0, index - 30);
+                const end = Math.min(cleanContent.length, index + searchTerm.length + 30);
+                return '...' + cleanContent.substring(start, end) + '...';
+            }
+
+            addBookmark() {
+                const bookmark = {
+                    scene: this.currentScene,
+                    page: this.currentPage,
+                    timestamp: new Date().toLocaleString()
+                };
+                
+                this.bookmarks.push(bookmark);
+                this.updateBookmarksList();
+                
+                // Show confirmation
+                const btn = document.getElementById('addBookmark');
+                const originalText = btn.textContent;
+                btn.textContent = 'Bookmarked!';
+                btn.style.background = 'linear-gradient(135deg, #228B22, #32CD32)';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = 'linear-gradient(135deg, #8B4513, #A0522D)';
+                }, 1500);
+            }
+
+            updateBookmarksList() {
+                const container = document.getElementById('bookmarksList');
+                
+                if (this.bookmarks.length === 0) {
+                    container.innerHTML = '<div class="nav-item">No bookmarks yet</div>';
+                    return;
+                }
+
+                container.innerHTML = this.bookmarks.map((bookmark, index) => `
+                    <div class="bookmark-item">
+                        <span class="bookmark-page">p.${bookmark.page}</span>
+                        <span class="bookmark-preview">${romeoJulietData.scenes[bookmark.scene].title}</span>
+                    </div>
+                `).join('');
+            }
+
+            updatePageDisplay() {
+                document.getElementById('currentPage').textContent = this.currentPage;
+                this.updateProgress();
+            }
+
+            updateProgress() {
+                const percentage = Math.round((this.currentPage / romeoJulietData.metadata.page_count) * 100);
+                document.getElementById('progressPercent').textContent = percentage + '%';
+                document.getElementById('progressFill').style.width = percentage + '%';
+            }
+        }
+
+        // Initialize the demo when the page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            new BookDemo();
+        });
+    </script>
+</body>
+</html>
