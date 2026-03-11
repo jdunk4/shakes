@@ -1,0 +1,378 @@
+{
+  "book": {
+    "metadata": {
+      "id": "romeo_juliet_shakespeare",
+      "title": "The Tragedy of Romeo and Juliet",
+      "author": "William Shakespeare",
+      "year_written": "1594-1595",
+      "genre": "Tragedy",
+      "language": "English",
+      "copyright_status": "Public Domain",
+      "source": "Project Gutenberg / Open Source Shakespeare",
+      "isbn": null,
+      "cover_image_url": null,
+      "description": "Shakespeare's timeless tale of star-crossed lovers from feuding families in Verona. This tragic romance follows Romeo Montague and Juliet Capulet as their forbidden love leads them to secret marriage, family violence, and ultimately their own deaths, which finally reconciles their warring houses.",
+      "page_count": 142,
+      "word_count": 24545,
+      "reading_time_minutes": 98,
+      "difficulty_level": "Advanced",
+      "subjects": ["Drama", "Romance", "Tragedy", "Classic Literature", "Renaissance Literature"]
+    },
+    "structure": {
+      "type": "play",
+      "format": "verse_and_prose",
+      "acts": 5,
+      "scenes": 24,
+      "total_pages": 142
+    },
+    "characters": [
+      {
+        "name": "Romeo Montague",
+        "description": "Son to Montague, the tragic hero",
+        "house": "Montague"
+      },
+      {
+        "name": "Juliet Capulet", 
+        "description": "Daughter to Capulet, the tragic heroine",
+        "house": "Capulet"
+      },
+      {
+        "name": "Friar Lawrence",
+        "description": "A Franciscan friar who marries the lovers",
+        "house": "Neutral"
+      },
+      {
+        "name": "Mercutio",
+        "description": "Romeo's friend, kinsman to Prince Escalus",
+        "house": "Neutral"
+      },
+      {
+        "name": "Tybalt",
+        "description": "Juliet's cousin, a skilled swordsman",
+        "house": "Capulet"
+      },
+      {
+        "name": "Nurse",
+        "description": "Juliet's devoted wet nurse",
+        "house": "Capulet"
+      },
+      {
+        "name": "Prince Escalus",
+        "description": "Prince of Verona",
+        "house": "Authority"
+      },
+      {
+        "name": "Capulet",
+        "description": "Head of the Capulet family",
+        "house": "Capulet"
+      },
+      {
+        "name": "Lady Capulet",
+        "description": "Juliet's mother",
+        "house": "Capulet"
+      },
+      {
+        "name": "Montague",
+        "description": "Head of the Montague family",
+        "house": "Montague"
+      },
+      {
+        "name": "Lady Montague",
+        "description": "Romeo's mother",
+        "house": "Montague"
+      },
+      {
+        "name": "Benvolio",
+        "description": "Romeo's cousin and friend, a peacekeeper",
+        "house": "Montague"
+      },
+      {
+        "name": "Paris",
+        "description": "A young nobleman, suitor to Juliet",
+        "house": "Neutral"
+      }
+    ],
+    "navigation": {
+      "table_of_contents": [
+        {
+          "section": "Front Matter",
+          "page": 1,
+          "items": [
+            {"title": "Title Page", "page": 1},
+            {"title": "Dramatis Personæ", "page": 2},
+            {"title": "Setting & Context", "page": 4}
+          ]
+        },
+        {
+          "section": "Prologue",
+          "page": 5,
+          "act": 0,
+          "scene": 0
+        },
+        {
+          "section": "Act I",
+          "page": 6,
+          "act": 1,
+          "scenes": [
+            {"title": "Scene I: A public place", "page": 6, "act": 1, "scene": 1},
+            {"title": "Scene II: A Street", "page": 15, "act": 1, "scene": 2},
+            {"title": "Scene III: Room in Capulet's House", "page": 21, "act": 1, "scene": 3},
+            {"title": "Scene IV: A Street", "page": 28, "act": 1, "scene": 4},
+            {"title": "Scene V: A Hall in Capulet's House", "page": 36, "act": 1, "scene": 5}
+          ]
+        },
+        {
+          "section": "Act II",
+          "page": 44,
+          "act": 2,
+          "scenes": [
+            {"title": "Chorus", "page": 44, "act": 2, "scene": 0},
+            {"title": "Scene I: An open place adjoining Capulet's Garden", "page": 45, "act": 2, "scene": 1},
+            {"title": "Scene II: Capulet's Garden (Balcony Scene)", "page": 47, "act": 2, "scene": 2},
+            {"title": "Scene III: Friar Lawrence's Cell", "page": 58, "act": 2, "scene": 3},
+            {"title": "Scene IV: A Street", "page": 64, "act": 2, "scene": 4},
+            {"title": "Scene V: Capulet's Garden", "page": 74, "act": 2, "scene": 5},
+            {"title": "Scene VI: Friar Lawrence's Cell", "page": 78, "act": 2, "scene": 6}
+          ]
+        },
+        {
+          "section": "Act III",
+          "page": 80,
+          "act": 3,
+          "scenes": [
+            {"title": "Scene I: A public place (The Fight)", "page": 80, "act": 3, "scene": 1},
+            {"title": "Scene II: A Room in Capulet's House", "page": 90, "act": 3, "scene": 2},
+            {"title": "Scene III: Friar Lawrence's cell", "page": 98, "act": 3, "scene": 3},
+            {"title": "Scene IV: A Room in Capulet's House", "page": 108, "act": 3, "scene": 4},
+            {"title": "Scene V: Juliet's Chamber", "page": 109, "act": 3, "scene": 5}
+          ]
+        },
+        {
+          "section": "Act IV",
+          "page": 118,
+          "act": 4,
+          "scenes": [
+            {"title": "Scene I: Friar Lawrence's Cell", "page": 118, "act": 4, "scene": 1},
+            {"title": "Scene II: Hall in Capulet's House", "page": 123, "act": 4, "scene": 2},
+            {"title": "Scene III: Juliet's Chamber", "page": 125, "act": 4, "scene": 3},
+            {"title": "Scene IV: Hall in Capulet's House", "page": 128, "act": 4, "scene": 4},
+            {"title": "Scene V: Juliet's Chamber", "page": 129, "act": 4, "scene": 5}
+          ]
+        },
+        {
+          "section": "Act V",
+          "page": 133,
+          "act": 5,
+          "scenes": [
+            {"title": "Scene I: Mantua. A Street", "page": 133, "act": 5, "scene": 1},
+            {"title": "Scene II: Friar Lawrence's Cell", "page": 137, "act": 5, "scene": 2},
+            {"title": "Scene III: A churchyard; Monument of the Capulets", "page": 138, "act": 5, "scene": 3}
+          ]
+        }
+      ]
+    },
+    "quick_navigation": {
+      "famous_scenes": [
+        {"name": "Balcony Scene", "act": 2, "scene": 2, "page": 47},
+        {"name": "Queen Mab Speech", "act": 1, "scene": 4, "page": 32},
+        {"name": "The Fight Scene", "act": 3, "scene": 1, "page": 80},
+        {"name": "Potion Scene", "act": 4, "scene": 3, "page": 125},
+        {"name": "Tomb Scene", "act": 5, "scene": 3, "page": 142}
+      ],
+      "famous_quotes": [
+        {"quote": "But soft, what light through yonder window breaks?", "act": 2, "scene": 2, "page": 48},
+        {"quote": "Romeo, Romeo, wherefore art thou Romeo?", "act": 2, "scene": 2, "page": 49},
+        {"quote": "What's in a name? That which we call a rose By any other name would smell as sweet", "act": 2, "scene": 2, "page": 50},
+        {"quote": "A plague o' both your houses!", "act": 3, "scene": 1, "page": 85},
+        {"quote": "Good night, good night! Parting is such sweet sorrow", "act": 2, "scene": 2, "page": 57}
+      ]
+    },
+    "bookmarks": [],
+    "reading_progress": {
+      "current_page": 1,
+      "current_act": null,
+      "current_scene": null,
+      "percentage_complete": 0,
+      "last_read": null,
+      "reading_sessions": []
+    },
+    "interaction_settings": {
+      "font_size": "medium",
+      "theme": "parchment",
+      "line_spacing": "normal",
+      "show_line_numbers": false,
+      "highlight_speakers": true,
+      "show_stage_directions": true,
+      "auto_bookmark": true
+    }
+  },
+  "content": {
+    "front_matter": {
+      "title_page": {
+        "page": 1,
+        "content": "THE TRAGEDY OF ROMEO AND JULIET\n\nby William Shakespeare\n\n[Decorative ornament]\n\nThe most excellent and lamentable tragedy of Romeo and Juliet\nAs it hath been sundry times publicly acted\nby the right honourable the Lord Chamberlain's servants\n\nPublic Domain Edition"
+      },
+      "dramatis_personae": {
+        "page": 2,
+        "title": "Dramatis Personæ",
+        "content": "ESCALUS, Prince of Verona.\nMERCUTIO, kinsman to the Prince, and friend to Romeo.\nPARIS, a young Nobleman, kinsman to the Prince.\nPage to Paris.\n\nMONTAGUE, head of a Veronese family at feud with the Capulets.\nLADY MONTAGUE, wife to Montague.\nROMEO, son to Montague.\nBENVOLIO, nephew to Montague, and friend to Romeo.\nABRAM, servant to Montague.\nBALTHASAR, servant to Romeo.\n\nCAPULET, head of a Veronese family at feud with the Montagues.\nLADY CAPULET, wife to Capulet.\nJULIET, daughter to Capulet.\nTYBALT, nephew to Lady Capulet.\nCAPULET'S COUSIN, an old man.\nNURSE to Juliet.\nPETER, servant to Juliet's Nurse.\nSAMPSON, servant to Capulet.\nGREGORY, servant to Capulet.\nServants.\n\nFRIAR LAWRENCE, a Franciscan.\nFRIAR JOHN, of the same Order.\nAn Apothecary.\nCHORUS.\nThree Musicians.\nAn Officer.\nCitizens of Verona; several Men and Women, relations to both houses; Maskers, Guards, Watchmen and Attendants."
+      },
+      "setting": {
+        "page": 4,
+        "title": "Setting & Context",
+        "content": "SCENE: During the greater part of the Play in Verona; once, in the Fifth Act, at Mantua.\n\nVerona, a city in northern Italy, serves as the backdrop for this tale of feuding families and star-crossed lovers. The action moves between public squares, the houses of the Montagues and Capulets, Friar Lawrence's cell, and finally to the tomb where the lovers meet their fate.\n\nThe play unfolds over the course of five days, from Sunday when Romeo and Juliet meet, to Thursday morning when they are found dead together."
+      }
+    },
+    "prologue": {
+      "page": 5,
+      "act": 0,
+      "scene": 0,
+      "title": "THE PROLOGUE",
+      "stage_directions": "Enter Chorus.",
+      "content": "CHORUS.\nTwo households, both alike in dignity,\nIn fair Verona, where we lay our scene,\nFrom ancient grudge break to new mutiny,\nWhere civil blood makes civil hands unclean.\nFrom forth the fatal loins of these two foes\nA pair of star-cross'd lovers take their life;\nWhose misadventur'd piteous overthrows\nDoth with their death bury their parents' strife.\nThe fearful passage of their death-mark'd love,\nAnd the continuance of their parents' rage,\nWhich, but their children's end, nought could remove,\nIs now the two hours' traffic of our stage;\nThe which, if you with patient ears attend,\nWhat here shall miss, our toil shall strive to mend.\n\n[Exit.]"
+    },
+    "acts": {
+      "1": {
+        "title": "ACT I",
+        "scenes": {
+          "1": {
+            "page": 6,
+            "title": "SCENE I. A public place.",
+            "setting": "Verona. A public place.",
+            "stage_directions": "Enter Sampson and Gregory armed with swords and bucklers.",
+            "content": "SAMPSON.\nGregory, on my word, we'll not carry coals.\n\nGREGORY.\nNo, for then we should be colliers.\n\nSAMPSON.\nI mean, if we be in choler, we'll draw.\n\nGREGORY.\nAy, while you live, draw your neck out o' the collar.\n\nSAMPSON.\nI strike quickly, being moved.\n\nGREGORY.\nBut thou art not quickly moved to strike.\n\nSAMPSON.\nA dog of the house of Montague moves me.\n\nGREGORY.\nTo move is to stir; and to be valiant is to stand:\ntherefore, if thou art moved, thou runn'st away.\n\n[Content continues with the full fight scene, Prince's intervention, Romeo's introduction, and his lovesick state over Rosaline...]"
+          },
+          "2": {
+            "page": 15,
+            "title": "SCENE II. A Street.",
+            "setting": "A street in Verona.",
+            "stage_directions": "Enter Capulet, Paris and Servant.",
+            "content": "CAPULET.\nBut Montague is bound as well as I,\nIn penalty alike; and 'tis not hard, I think,\nFor men so old as we to keep the peace.\n\n[Scene continues with Paris asking for Juliet's hand, Capulet's party invitation, and Romeo learning about Rosaline's attendance...]"
+          }
+        }
+      },
+      "2": {
+        "title": "ACT II", 
+        "scenes": {
+          "0": {
+            "page": 44,
+            "title": "CHORUS",
+            "content": "Enter Chorus.\n\nCHORUS.\nNow old desire doth in his deathbed lie,\nAnd young affection gapes to be his heir;\nThat fair for which love groan'd for and would die,\nWith tender Juliet match'd, is now not fair.\n[Chorus continues...]"
+          },
+          "2": {
+            "page": 47,
+            "title": "SCENE II. Capulet's Garden.",
+            "setting": "Capulet's orchard garden, beneath Juliet's window.",
+            "famous_scene": "Balcony Scene",
+            "stage_directions": "Enter Romeo. Juliet appears above at a window.",
+            "content": "ROMEO.\nHe jests at scars that never felt a wound.\n\nBut soft, what light through yonder window breaks?\nIt is the east, and Juliet is the sun!\nArise fair sun and kill the envious moon,\nWho is already sick and pale with grief,\nThat thou her maid art far more fair than she.\n\n[The famous balcony scene continues with their declarations of love, plans for marriage, and reluctant parting...]"
+          }
+        }
+      },
+      "3": {
+        "title": "ACT III",
+        "scenes": {
+          "1": {
+            "page": 80,
+            "title": "SCENE I. A public Place.",
+            "setting": "A public square in Verona.",
+            "famous_scene": "The Fight Scene",
+            "stage_directions": "Enter Mercutio, Benvolio, Page and Servants.",
+            "content": "BENVOLIO.\nI pray thee, good Mercutio, let's retire:\nThe day is hot, the Capulets abroad,\nAnd if we meet, we shall not scape a brawl,\nFor now these hot days, is the mad blood stirring.\n\n[Scene continues with Tybalt's challenge, Mercutio's death, Romeo's revenge killing of Tybalt, and Romeo's banishment...]"
+          }
+        }
+      },
+      "4": {
+        "title": "ACT IV",
+        "scenes": {
+          "3": {
+            "page": 125,
+            "title": "SCENE III. Juliet's Chamber.",
+            "setting": "Juliet's bedchamber in the Capulet house.",
+            "famous_scene": "Potion Scene",
+            "stage_directions": "Enter Juliet and Nurse.",
+            "content": "JULIET.\nAy, those attires are best; but, gentle Nurse,\nI pray thee leave me to myself tonight;\nFor I have need of many orisons\nTo move the heavens to smile upon my state,\nWhich well thou knowest is cross and full of sin.\n\n[Scene continues with Juliet's fears about the potion and her brave decision to drink it...]"
+          }
+        }
+      },
+      "5": {
+        "title": "ACT V",
+        "scenes": {
+          "3": {
+            "page": 138,
+            "title": "SCENE III. A churchyard; in it a Monument belonging to the Capulets.",
+            "setting": "The Capulet tomb in a churchyard.",
+            "famous_scene": "Tomb Scene - The Tragic Ending",
+            "stage_directions": "Enter Paris and his Page with flowers and a torch.",
+            "content": "PARIS.\nGive me thy torch, boy. Hence and stand aloof.\nYet put it out, for I would not be seen.\nUnder yond yew tree lay thee all along,\nHolding thy ear close to the hollow ground.\n\n[The final tragic scene where Romeo finds Juliet seemingly dead, takes poison, Juliet awakens to find Romeo dead, and takes her own life with his dagger...]"
+          }
+        }
+      }
+    }
+  },
+  "game_integration": {
+    "bookshelf_display": {
+      "spine_title": "Romeo & Juliet",
+      "spine_author": "Shakespeare",
+      "spine_color": "deep_red",
+      "spine_texture": "leather_bound",
+      "book_thickness": "medium",
+      "wear_level": "well_used",
+      "bookmark_ribbons": 2
+    },
+    "interaction_triggers": {
+      "on_hover": {
+        "display_icon": "book_open",
+        "tooltip": "READ - The Tragedy of Romeo and Juliet",
+        "preview_text": "Two households, both alike in dignity, In fair Verona, where we lay our scene..."
+      },
+      "on_click": {
+        "action": "open_book",
+        "transition": "fade_to_book_interface",
+        "sound_effect": "pages_rustle"
+      }
+    },
+    "reading_interface": {
+      "navigation_options": [
+        "table_of_contents",
+        "act_selector",
+        "scene_selector", 
+        "search",
+        "bookmarks",
+        "famous_quotes",
+        "character_index"
+      ],
+      "display_options": {
+        "page_view": "single_page",
+        "font_family": "serif",
+        "page_texture": "aged_parchment",
+        "margin_notes": true,
+        "act_scene_headers": true
+      },
+      "interactive_features": [
+        "highlight_text",
+        "add_bookmarks",
+        "character_tracking",
+        "quote_collection",
+        "reading_progress_save"
+      ]
+    },
+    "achievements": [
+      {
+        "name": "Star-Crossed Reader",
+        "description": "Complete Romeo and Juliet",
+        "unlock_condition": "read_percentage >= 100"
+      },
+      {
+        "name": "Shakespearean Scholar",
+        "description": "Read the balcony scene",
+        "unlock_condition": "read_scene(2, 2)"
+      },
+      {
+        "name": "Tragedy Enthusiast", 
+        "description": "Read the final scene",
+        "unlock_condition": "read_scene(5, 3)"
+      }
+    ]
+  }
+}
