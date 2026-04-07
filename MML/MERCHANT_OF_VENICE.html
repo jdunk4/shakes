@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>MERCHANT_OF_VENICE</title></head>
+<body>
+<m-group id="book-root" y="1.2">
+
+  <m-group id="book-closed" onclick="openBook()">
+
+    <!-- BODY CUBE -->
+    <m-cube color="#2a0e06" width="0.06" height="0.44" depth="0.32"></m-cube>
+
+    <!-- Top / bottom / back faces -->
+    <m-plane color="#3a1610" width="0.06" height="0.32" y=" 0.221" rx="-90"></m-plane>
+    <m-plane color="#180904" width="0.06" height="0.32" y="-0.221" rx="90"></m-plane>
+
+    <!-- SPINE -->
+    <m-image id="spine-img" src="https://turbo-gateway.com/MJCmWLrkA2Oehpw8BdZLGuXJ7K-eDfqmVOVQzkknbkc" width="0.060" height="0.440" z="0.163" emissive="1.0">
+    </m-image>
+
+    <!-- Raised ribs -->
+    <m-cube color="#3a0e06" width="0.066" height="0.010" depth="0.010" z="0.159" y=" 0.050"></m-cube>
+    <m-plane color="#c8961e" width="0.062" height="0.003" z="0.169" y=" 0.050"></m-plane>
+    <m-cube color="#3a0e06" width="0.066" height="0.010" depth="0.010" z="0.159" y="-0.048"></m-cube>
+    <m-plane color="#c8961e" width="0.062" height="0.003" z="0.169" y="-0.048"></m-plane>
+    <m-cube color="#3a0e06" width="0.066" height="0.010" depth="0.010" z="0.159" y="-0.138"></m-cube>
+    <m-plane color="#c8961e" width="0.062" height="0.003" z="0.169" y="-0.138"></m-plane>
+
+    <!-- Invisible full-spine click target -->
+    <m-plane width="0.066" height="0.46" opacity="0.01" z="0.168"></m-plane>
+
+  </m-group>
+
+  <m-group id="book-ui" visible="false">
+    <m-cube width="0.04" height="1.30" depth="0.06" color="#3b1f0e"></m-cube>
+
+    <m-plane id="tab-bg-0" width="0.34" height="0.14" color="#f0a832" x="-0.72" y="0.74" z="0.02"></m-plane>
+    <m-label id="tab-0" content="ACT I" width="0.34" height="0.14" color="#f0a832" x="-0.72" y="0.74" z="0.03" font-size="5" font-color="#ffffff" alignment="center" onclick="jumpToAct(0)"></m-label>
+    <m-plane id="tab-bg-1" width="0.34" height="0.14" color="#e8824a" x="-0.36" y="0.74" z="0.02"></m-plane>
+    <m-label id="tab-1" content="ACT II" width="0.34" height="0.14" color="#e8824a" x="-0.36" y="0.74" z="0.03" font-size="5" font-color="#ffffff" alignment="center" onclick="jumpToAct(1)"></m-label>
+    <m-plane id="tab-bg-2" width="0.34" height="0.14" color="#c94d5a" x="0.00" y="0.74" z="0.02"></m-plane>
+    <m-label id="tab-2" content="ACT III" width="0.34" height="0.14" color="#c94d5a" x="0.00" y="0.74" z="0.03" font-size="5" font-color="#ffffff" alignment="center" onclick="jumpToAct(2)"></m-label>
+    <m-plane id="tab-bg-3" width="0.34" height="0.14" color="#9b2335" x="0.36" y="0.74" z="0.02"></m-plane>
+    <m-label id="tab-3" content="ACT IV" width="0.34" height="0.14" color="#9b2335" x="0.36" y="0.74" z="0.03" font-size="5" font-color="#ffffff" alignment="center" onclick="jumpToAct(3)"></m-label>
+    <m-plane id="tab-bg-4" width="0.34" height="0.14" color="#7a1535" x="0.72" y="0.74" z="0.02"></m-plane>
+    <m-label id="tab-4" content="ACT V" width="0.34" height="0.14" color="#7a1535" x="0.72" y="0.74" z="0.03" font-size="5" font-color="#ffffff" alignment="center" onclick="jumpToAct(4)"></m-label>
+
+    <m-image id="page-img" width="1.88" height="1.24" x="0" y="-0.02" z="0" emissive="0.5" src=""></m-image>
+    <m-label id="status" content="" width="1.6" height="0.10" x="0" y="-0.70" z="0.05" font-size="3.0" font-color="#f0a832" alignment="center"></m-label>
+
+    <m-plane width="0.30" height="0.10" color="#f0a832" x="-0.65" y="-0.78" z="0.05"></m-plane>
+    <m-label content="PREV" width="0.30" height="0.10" color="#f0a832" x="-0.65" y="-0.78" z="0.06" font-size="4" font-color="#ffffff" alignment="center" onclick="prevPage()"></m-label>
+    <m-plane width="0.30" height="0.10" color="#c94d5a" x="0.65" y="-0.78" z="0.05"></m-plane>
+    <m-label content="NEXT" width="0.30" height="0.10" color="#c94d5a" x="0.65" y="-0.78" z="0.06" font-size="4" font-color="#ffffff" alignment="center" onclick="nextPage()"></m-label>
+    <m-plane width="0.28" height="0.10" color="#7a1535" x="0.0" y="-0.78" z="0.05"></m-plane>
+    <m-label content="CLOSE" width="0.28" height="0.10" color="#7a1535" x="0.0" y="-0.78" z="0.06" font-size="4" font-color="#ffffff" alignment="center" onclick="closeBook()"></m-label>
+  </m-group>
+
+  <script>
+    (function() {
+      const PAGES = [
+        "https://turbo-gateway.com/DvGQ5jjB1c7DtI6GxKk_q9IQ46acGKVcRK7Dm0APJdE",
+        "https://turbo-gateway.com/4ClAgb4vt-p0hcQLJFb9S0Lq3mN5qPrXdVhIirvhkbA",
+        "https://turbo-gateway.com/LR48Qkk0c1172L2u0GgFZqY2xfUC55UmHGc_fa5A5D0",
+        "https://turbo-gateway.com/bqOAOg0Tr7VxdGnt7UyN0E81_IbBWhW72Agn5YloxAM",
+        "https://turbo-gateway.com/NBhZQBiODPL4Rea6w_6FKKFuk7y-V4qFXsO2Kaue7ds",
+        "https://turbo-gateway.com/Ssn5O4W16ndbLYabitYTLj8Hlr4DcdihfyAeCWzW-0s",
+        "https://turbo-gateway.com/caxsPKy5kuvVcIRevIescMx9jiYDSeadqp7RfII6HzM",
+        "https://turbo-gateway.com/s-VQlnTWyoTD70AqrRZfQ2w5A6-MD8L94GuAa-8hu2I",
+        "https://turbo-gateway.com/AL4ZqXJFP7zW1cDIRkVKv60_7iDipdIEb8USvbN-qSE",
+        "https://turbo-gateway.com/mXsComXC2cA2FJjz39-0_B2eTAiFdYEEEimccsU2wUI",
+        "https://turbo-gateway.com/3JNgiK88V6mBxHsxM3C--stHwE-jrfjbvvJtrTcVm4k",
+        "https://turbo-gateway.com/JhbMA_5L2hoc7B-tVmYLfV2Aoi7HWf44Yv8fc3jJ_uE",
+        "https://turbo-gateway.com/Abwjp8Pyye7-uxFDeJTQ5gFXHOvZX9QP1AmyezftyDY",
+        "https://turbo-gateway.com/bnbx6d10a5K2KbkrGgbZLa8OetQgw6HH6Ll3d524-vk",
+        "https://turbo-gateway.com/qBvfgG_XtqfObIAIvb7A0LF1KxxZbvXY6oWLn7c0VMU",
+        "https://turbo-gateway.com/qH9WSDXJIuAR4weYvpr5ig5TTi4b20KaKwBji9f39s4",
+        "https://turbo-gateway.com/6_HgpJC0faG6uLmjLNXGzFa7ztJcrySfADr23crUBKw",
+        "https://turbo-gateway.com/MWDb_3rzXNRbPLnfdi-eLJ8IP05HBBpvDywyDqji6xU",
+        "https://turbo-gateway.com/49CVV0PSxGsce3XITKot9EmYl6D83A4E7Bx-rEi9QbU",
+        "https://turbo-gateway.com/gXkqcsu53eXMhMLHwor0L9IXpxRfvbDDbp5uWRBsgpw",
+        "https://turbo-gateway.com/HX7VfS7-dtZJcwMxU1TX_r8RnC2lAhh6oR5GqLfRIxQ",
+        "https://turbo-gateway.com/PyrPs2k93oETSyZGiSWOUavfffKHOUxoWqLkGozzw_4",
+        "https://turbo-gateway.com/A61hs3ohkexUhKq0S6Mfu-Tw8ESShkg8sMZ1ZtdJm4I",
+        "https://turbo-gateway.com/ze0I5LJ4pxFIW-qKQ4TTykmu4GOXN3vDXC0WdWUWejg",
+        "https://turbo-gateway.com/VPyPeKBWzscK96MJ3LharUhJk_mNC_i1TeFmCgBeW8Q",
+        "https://turbo-gateway.com/NzfpXSjtgqzobVGfnbH_NMlMpVGD5QAMhWC_-fTfXeQ",
+        "https://turbo-gateway.com/ZjdsQMAdh56sUJf3NLQNm24DscrMSxY_3MajwoQxcVE",
+        "https://turbo-gateway.com/hzqAYqoMNAKTxuzKx7VamQBPG_bXC1DGhrHRQG7B6EQ",
+        "https://turbo-gateway.com/xqOldig1IvfqSWw3HScePfrZoC51qmKF5rQKw0GBFdE",
+        "https://turbo-gateway.com/AibdzHhXZNYu2nngunrPBEh863ODZn_KcooLiwjK2Ho",
+        "https://turbo-gateway.com/-34X_hbQJiDDtPf0kzwAz7VvnL6kpEucn_wSXP75Ukw",
+        "https://turbo-gateway.com/6UoEF7-hsXGFNgaIZewWbnwtbYr1qEJCJvX9nusdfmw",
+        "https://turbo-gateway.com/usw71l_aPAYOp9aUC-9Ggk6OfuNStU3pQ1X8URqCWSQ",
+        "https://turbo-gateway.com/0IyF1cFKv2Fn2B4igNB5pqjhRoi5cIVw98ieOVbsuLA",
+        "https://turbo-gateway.com/p7Ni5aaDmQ-eGo5mUeQQXhJ3MRvZYcxT1dOSIqgkWo4",
+        "https://turbo-gateway.com/uRSkmvAqtH9POXZJ67DGNoYUnfFXIkprAr979Zi2Vm4",
+        "https://turbo-gateway.com/or3UiRtP-C_hX0Qz5jmZ0P5aMkzfprA5kf-ehZsGHTM",
+        "https://turbo-gateway.com/ojsWau1YDNO7CV8oo0oLhFR1WTMrzQ1KqaxqaK6tCNQ",
+        "https://turbo-gateway.com/o_hO_aLDLIDkME4vniXd9j4YcKCUXKWxYkfvzUQApCw",
+        "https://turbo-gateway.com/mACyqX64yrLpnNOlIWHfmdJ0bJf5OHIys-g3s4vBwjw",
+        "https://turbo-gateway.com/M59OotBUBJ0pbVlre2lLOPxEynP7ypNh0xxoSnOYDY8",
+        "https://turbo-gateway.com/Z06BDX94gEv1ZkCrUkKqP1JFQy1g88M2FUfvzBXDK6s",
+        "https://turbo-gateway.com/VMN7PvIy4ukkoAdsirIiDjL1T4j2LxdTdwUFs7dRzrE",
+        "https://turbo-gateway.com/dcsC-wtqFKXMLUtpZdtFYJkJ42PhtIxZDfF4CO7jR1o",
+        "https://turbo-gateway.com/QT9orwGha-oHiachq6zEVYmxh5ousJPeuW6mwJsW800",
+        "https://turbo-gateway.com/ER7-eGSaDRKbTuH8SAcupZwrTM7boHqatXkK04BaWuQ",
+        "https://turbo-gateway.com/P4UI-AhtZHEJ0G9S90OnahJvoMAEugG7N__yuxzAorM",
+        "https://turbo-gateway.com/0o5_xIj_QJVq0ZlC3J9PJlUfqMcld4sPiXPHHNVcNpU",
+        "https://turbo-gateway.com/VIbrriJGoQYVllKUxHMH6dA2L_BbOdLFNNW7gkpk61s",
+        "https://turbo-gateway.com/FJ8gzE4VLOBysLYEVKFASEbAZtVXxQ2dfsH5MJ9heGI",
+        "https://turbo-gateway.com/HZZN9vhPE7meRMjLnLXBVJ1REUM1q_n3EgYiOGoZmBA",
+        "https://turbo-gateway.com/aOaCSQArXdxM4ROFubKw7J7ntoK3BRaMqiior11oLd4",
+        "https://turbo-gateway.com/83-sLrlkp6ZwT8_dcm80et0E1mDalpKeJf3PdygSbMA",
+        "https://turbo-gateway.com/lWhRrNu5_kKwFFvPlNTFXhkwHtmK4u-VPwX1vKqd4cY",
+        "https://turbo-gateway.com/3pbCdUKllPjn821w2v6zIWl8v9hN1O37QE4QZsDfdjs",
+        "https://turbo-gateway.com/WYexpzQZz5p5mOhFTd5puV-K6OclCuB3eazafeO4jLw",
+        "https://turbo-gateway.com/JjTjan5544nDOjGyLA3AxtOm3Mxzsx6jbSDS5BvqR8g",
+        "https://turbo-gateway.com/CNBxVZbtYo4QAronYBy-yvECM5Oo7Z_oGGguj7uaK14",
+        "https://turbo-gateway.com/GJpLI-NZ0Kk2VQk71kMQT_zkT7f9mZfWjoPUlNqDfiw",
+        "https://turbo-gateway.com/zQbJKT-nUKsqVjxn5CuTEvRuha-t5bqVyIs3t6PvwTE",
+        "https://turbo-gateway.com/VpVxnfuiHEeSsBIitdaErPiW1T6-iasoaUUqRw9uGX4",
+        "https://turbo-gateway.com/ZmAHWGFqZx3TqNnyy3qc2atM9aG-aIC6Y-Nogd2G44s",
+        "https://turbo-gateway.com/bOd9Wnly4728EirjUO5hicS-KpJf6I4I-xBwAy3JFSM",
+        "https://turbo-gateway.com/BqzZI1xoVB8mieXoT6WKa_Z3ATI3hyFKHdhE3bThUjk",
+        "https://turbo-gateway.com/FHgTMz1T-CxI8PCZQuohZ4kXIw6uXS_J7rFQn1kAWIk",
+        "https://turbo-gateway.com/-Wk8PN4nf9AvW0dNy-wCeXc6uykprVw8H3WRL9SVcBM",
+        "https://turbo-gateway.com/p97I48WkhWEURieg3rR0vlM8EIiafyMqz2NjJ3RiafA",
+        "https://turbo-gateway.com/3UTT-6c0A79R07GriI49GCDtAA8eX5DkLCYVxJBzL-Y",
+        "https://turbo-gateway.com/RS_KjwVqqEc5RwtVz71M_bjSSis3TTF1eNlNZASyDLM",
+        "https://turbo-gateway.com/1rZtUJK4pvw5RtgZZKyQKd0ItlkIY6uPlXwhDCyNbK8",
+        "https://turbo-gateway.com/rfIzzc05K65Chh6wXsQOsmzbrrHhIAg2lhLJHXeUEcA",
+        "https://turbo-gateway.com/tx7yeSMuhCZur6Tn8KSd-TKt7topWrEqdn3LBunziIQ",
+        "https://turbo-gateway.com/EZJuFcAMWAVNp6PeKbvmpUbwH-bESQIeQvXM4sUVcHo"
+      ];
+
+      const ACTS = [{
+          t: "ACT I",
+          s: 0,
+          n: 14
+        },
+        {
+          t: "ACT II",
+          s: 14,
+          n: 19
+        },
+        {
+          t: "ACT III",
+          s: 33,
+          n: 18
+        },
+        {
+          t: "ACT IV",
+          s: 51,
+          n: 13
+        },
+        {
+          t: "ACT V",
+          s: 64,
+          n: 9
+        }
+      ];
+
+      const FALLBACK_GATEWAYS = [
+        "https://arweave.net", "https://turbo-gateway.com", "https://permagate.io",
+        "https://ar-io.dev", "https://g8way.io", "https://gateway.irys.xyz"
+      ];
+      let activeGateways = [...FALLBACK_GATEWAYS];
+
+      async function fetchGatewayList() {
+        try {
+          const r = await fetch("https://ar-io.dev/ar-io/peers", {
+            signal: AbortSignal.timeout(5000)
+          });
+          const peers = await r.json();
+          activeGateways = [...FALLBACK_GATEWAYS, ...peers.map(p => "https://" + p)];
+        } catch {}
+      }
+
+      const TX_IDS = PAGES.map(u => u.split("/").pop());
+      let curAct = 0,
+        curPage = 0,
+        isAnim = false;
+      const bookClosed = document.getElementById("book-closed");
+      const bookUI = document.getElementById("book-ui");
+      const status = document.getElementById("status");
+      const img = document.getElementById("page-img");
+      const cache = {},
+        inflight = {};
+
+      function fetchPage(idx) {
+        if (cache[idx] || inflight[idx] || idx >= PAGES.length) return;
+        inflight[idx] = true;
+        const tx = TX_IDS[idx];
+        let done = false;
+        activeGateways.forEach(gw => {
+          const url = gw + "/" + tx;
+          const i = new Image();
+          i.onload = () => {
+            if (!done) {
+              done = true;
+              cache[idx] = url;
+            }
+          };
+          i.src = url;
+        });
+      }
+
+      function prefetchAhead() {
+        const base = ACTS[curAct].s + curPage;
+        for (let d = 1; d <= 4; d++) fetchPage(base + d);
+      }
+
+      function setStatus(m) {
+        status.setAttribute("content", m);
+      }
+
+      const ACT_COLORS = ["#f0a832", "#e8824a", "#c94d5a", "#9b2335", "#7a1535"];
+
+      function updateTabs() {
+        for (let i = 0; i < 5; i++) {
+          const bg = document.getElementById("tab-bg-" + i);
+          const lb = document.getElementById("tab-" + i);
+          if (!bg || !lb) continue;
+          const on = i === curAct;
+          const h = on ? "0.18" : "0.14",
+            y = on ? "0.76" : "0.74";
+          bg.setAttribute("color", ACT_COLORS[i]);
+          bg.setAttribute("height", h);
+          bg.setAttribute("y", y);
+          lb.setAttribute("color", ACT_COLORS[i]);
+          lb.setAttribute("height", h);
+          lb.setAttribute("y", y);
+        }
+      }
+
+      function render() {
+        const a = ACTS[curAct],
+          idx = a.s + curPage;
+        const url = cache[idx] || PAGES[idx];
+        img.setAttribute("src", url);
+        if (!cache[idx]) fetchPage(idx);
+        updateTabs();
+        setStatus(a.t + " - " + (curPage + 1) + " of " + a.n);
+        setTimeout(() => setStatus(""), 4000);
+        prefetchAhead();
+      }
+
+      const STEPS = 22,
+        MS = 18;
+
+      function curl(dir, onMid, onDone) {
+        isAnim = true;
+        let s = 0;
+
+        function tick() {
+          s++;
+          const t = s / STEPS,
+            e = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+          img.setAttribute("ry", String((dir === 1 ? e * -170 : (1 - e) * -170).toFixed(1)));
+          if (s === Math.floor(STEPS / 2)) onMid();
+          if (s < STEPS) {
+            setTimeout(tick, MS);
+          } else {
+            img.setAttribute("ry", "0");
+            isAnim = false;
+            onDone();
+          }
+        }
+        tick();
+      }
+
+      function jumpToAct(i) {
+        if (i >= ACTS.length || isAnim) return;
+        curAct = i;
+        curPage = 0;
+        render();
+      }
+
+      function nextPage() {
+        if (isAnim) return;
+        const a = ACTS[curAct];
+        let na = curAct,
+          np = curPage;
+        if (curPage < a.n - 1) {
+          np++;
+        } else if (curAct < ACTS.length - 1) {
+          na++;
+          np = 0;
+        } else return;
+        curl(1, () => {
+          curAct = na;
+          curPage = np;
+          render();
+        }, () => {});
+      }
+
+      function prevPage() {
+        if (isAnim) return;
+        let na = curAct,
+          np = curPage;
+        if (curPage > 0) {
+          np--;
+        } else if (curAct > 0) {
+          na--;
+          np = ACTS[na].n - 1;
+        } else return;
+        curl(-1, () => {
+          curAct = na;
+          curPage = np;
+          render();
+        }, () => {});
+      }
+
+      function openBook() {
+        bookClosed.setAttribute("visible", "false");
+        bookUI.setAttribute("visible", "true");
+        fetchGatewayList().then(() => {
+          for (let i = 0; i < PAGES.length; i++) fetchPage(i);
+        });
+        for (let i = 0; i < PAGES.length; i++) fetchPage(i);
+        render();
+      }
+
+      function closeBook() {
+        bookUI.setAttribute("visible", "false");
+        bookClosed.setAttribute("visible", "true");
+      }
+
+      window.openBook = openBook;
+      window.closeBook = closeBook;
+      window.nextPage = nextPage;
+      window.prevPage = prevPage;
+      window.jumpToAct = jumpToAct;
+    })();
+  </script>
+
+</m-group>
+</body>
+</html>
